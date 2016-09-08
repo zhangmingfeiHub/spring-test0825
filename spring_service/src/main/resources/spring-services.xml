@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 创建第一位参赛者：duke（杂技师）；
+	spring容器加载bean时，会使用默认的构造器实例化duke； -->
+	<bean id="duke" class="com.mfzhang.service.impl.Juggler"></bean>
+
+</beans>
