@@ -5,7 +5,22 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- 创建第一位参赛者：duke（杂技师）；
-	spring容器加载bean时，会使用默认的构造器实例化duke； -->
-	<bean id="duke" class="com.mfzhang.service.impl.Juggler"></bean>
+	spring容器加载bean时，会使用默认的构造器实例化duke；
+	spring使用反射来创建bean -->
+	<!-- <bean id="duke" class="com.mfzhang.service.impl.Juggler"></bean> -->
+	
+	<!-- 构造器注入 -->
+	<bean id="duke" class="com.mfzhang.service.impl.Juggler">
+		<constructor-arg value="15"></constructor-arg>
+	</bean>
+	
+	<!-- 十四行诗 -->
+	<bean id="sonnet29" class="com.mfzhang.service.impl.Sonnet29"></bean>
+	
+	<!-- 会朗诵诗歌的杂技师 -->
+	<bean id="poemticJuggler" class="com.mfzhang.service.impl.PoemticJuggler">
+		<constructor-arg value="15"></constructor-arg>
+		<constructor-arg ref="sonnet29"></constructor-arg>
+	</bean>
 
 </beans>

@@ -16,8 +16,11 @@ public class TestService {
 	public void testPerfomer() {
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-services.xml");
-		Perfomer duke = ctx.getBean("duke",Perfomer.class);
-		duke.perform();
+//		Perfomer duke = ctx.getBean("duke",Perfomer.class);
+//		duke.perform();
+		
+		Perfomer poemticJuggler = ctx.getBean("poemticJuggler",Perfomer.class);
+		poemticJuggler.perform();
 	}
 	
 }
