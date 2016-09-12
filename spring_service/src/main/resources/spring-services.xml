@@ -22,5 +22,25 @@
 		<constructor-arg value="15"></constructor-arg>
 		<constructor-arg ref="sonnet29"></constructor-arg>
 	</bean>
+	
+	<!-- 工厂方法创建bean, factory-method: 指定静态方法 -->
+	<bean id="stage" class="com.mfzhang.api.bean.Stage" factory-method="getInstance"></bean>
+	
+	<!-- bean作用域：默认singleton(单例)、prototype -->
+	<bean id="ticket" class="com.mfzhang.api.bean.Ticket" scope="prototype"></bean>
+	
+	<!-- 测试factory-method和作用域scope共用 -->
+	<bean id="stageScope" class="com.mfzhang.api.bean.Stage" factory-method="getInstance" scope="prototype"></bean>
+	
+	<!-- 默认singleton(单例) -->
+	<bean id="ticketScope" class="com.mfzhang.api.bean.Ticket"></bean>
+	
+	<!-- bean的初始化方法、销毁方法 -->
+	<bean id="auditorium" class="com.mfzhang.api.bean.Auditorium" 
+	         init-method="turnOnLights" 
+	         destroy-method="turnOffLights"></bean>
+	         
+	<!-- bean的初始化和销毁的另一种方式 -->
+	<bean id="testInitAndDestoryBean" class="com.mfzhang.api.bean.TestInitAndDestoryBean"></bean>
 
 </beans>
