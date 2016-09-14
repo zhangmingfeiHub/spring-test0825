@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/util
+                        http://www.springframework.org/schema/util/spring-util.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd" 
+    default-init-method="" default-destroy-method="" default-autowire="byType">
 
 	<!-- 创建第一位参赛者：duke（杂技师）；
 	spring容器加载bean时，会使用默认的构造器实例化duke；
@@ -10,7 +18,7 @@
 	<!-- <bean id="duke" class="com.mfzhang.service.impl.Juggler"></bean> -->
 	
 	<!-- 构造器注入 -->
-	<bean id="duke" class="com.mfzhang.service.impl.Juggler">
+	<bean id="duke" class="com.mfzhang.service.impl.performer.Juggler">
 		<constructor-arg value="15"></constructor-arg>
 	</bean>
 	
@@ -18,7 +26,7 @@
 	<bean id="sonnet29" class="com.mfzhang.service.impl.Sonnet29"></bean>
 	
 	<!-- 会朗诵诗歌的杂技师 -->
-	<bean id="poemticJuggler" class="com.mfzhang.service.impl.PoemticJuggler">
+	<bean id="poemticJuggler" class="com.mfzhang.service.impl.performer.PoemticJuggler">
 		<constructor-arg value="15"></constructor-arg>
 		<constructor-arg ref="sonnet29"></constructor-arg>
 	</bean>
@@ -42,5 +50,105 @@
 	         
 	<!-- bean的初始化和销毁的另一种方式 -->
 	<bean id="testInitAndDestoryBean" class="com.mfzhang.api.bean.TestInitAndDestoryBean"></bean>
+	
+	<!-- setter注入 -->
+	<bean id="kenny" class="com.mfzhang.service.impl.performer.Instrumentalist">
+		<property name="song" value="一只小小鸟"></property>
+		<property name="age" value="22"></property>
+		<!-- <property name="instrument" ref="saxophone"></property> -->
+		<!-- <property name="instrument" ref="piano"></property> -->
+		
+		<!-- 内部bean -->
+		<property name="instrument">
+			<bean class="com.mfzhang.service.impl.instrument.Piano"></bean>
+		</property>
+	</bean>
+	
+	<bean id="saxophone" class="com.mfzhang.service.impl.instrument.Saxophone"></bean>
+	<bean id="piano" class="com.mfzhang.service.impl.instrument.Piano"></bean>
+
+	<!-- p命名空间 -->
+	<bean id="kenny2" class="com.mfzhang.service.impl.performer.Instrumentalist" 
+	                  p:song="两只小鸟" p:age="23" p:instrument-ref="saxophone"></bean>
+	                  
+	<!-- 集合类型注入 -->
+	<bean id="hank" class="com.mfzhang.service.impl.performer.OneManBand">
+		<property name="instrumentList">
+			<list>
+				<ref bean="guitar"/>
+				<ref bean="harmonica"/>
+				<ref bean="cymbal"/>
+			</list>
+		</property>
+		
+		<property name="instrumentForMap">
+			<map>
+				<entry key="GUITAR" value-ref="guitar"></entry>
+				<entry key="HARMONICA" value-ref="harmonica"></entry>
+				<entry key="CYMBAL" value-ref="cymbal"></entry>
+			</map>
+		</property>
+		
+		<property name="instrumentForProperties">
+			<props>
+				<prop key="GUITAR">GUITAR GUITAR GUITAR</prop>
+				<prop key="HARMONICA">HARMONICA HARMONICA HARMONICA</prop>
+				<prop key="CYMBAL">CYMBAL CYMBAL CYMBAL</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="guitar" class="com.mfzhang.service.impl.instrument.Guitar"></bean>
+	<bean id="harmonica" class="com.mfzhang.service.impl.instrument.Harmonica"></bean>
+	<bean id="cymbal" class="com.mfzhang.service.impl.instrument.Cymbal"></bean>
+	
+	<bean id="carl" class="com.mfzhang.service.impl.performer.Instrumentalist">
+		<property name="song" value="#{kenny.song}"></property>
+		<property name="age" value="20"></property>
+		<property name="instrument" value="#{kenny.instrument}"></property>
+	</bean>
+	
+	<util:list id="cities">
+		<bean class="com.mfzhang.api.bean.City" p:name="南昌" p:code="NC" p:population="11000000"></bean>
+		<bean class="com.mfzhang.api.bean.City" p:name="杭州" p:code="HZ" p:population="12000000"></bean>
+		<bean class="com.mfzhang.api.bean.City" p:name="上海" p:code="SH" p:population="13000000"></bean>
+		<bean class="com.mfzhang.api.bean.City" p:name="南京" p:code="NJ" p:population="14000000"></bean>
+		<bean class="com.mfzhang.api.bean.City" p:name="苏州" p:code="SZ" p:population="15000000"></bean>
+		<bean class="com.mfzhang.api.bean.City" p:name="北京" p:code="BJ" p:population="16000000"></bean>
+	</util:list>
+	
+	<!-- byName自动装配，缺点：多个Instrumentalist演奏的乐器只能是同一个乐器了 -->
+	<bean id="kenny3" class="com.mfzhang.service.impl.performer.Instrumentalist" p:song="#{kenny.song}" p:age="#{kenny.age}" autowire="byName">
+	</bean>
+	<bean id="instrument" class="com.mfzhang.service.impl.instrument.Saxophone"></bean>
+
+	<!-- byType自动装配，缺点：如果存在多个instrument(乐器)类型，怎会抛异常 -->
+	<bean id="kenny4" class="com.mfzhang.service.impl.performer.Instrumentalist" 
+	         p:song="#{kenny.song}" p:age="#{kenny.age}" p:instrument="#{guitar}" autowire="byType">
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 启用spring注解 -->
+	<context:annotation-config></context:annotation-config>
+	
+	<bean id="opusculum" class="com.mfzhang.service.impl.performer.Opusculum"></bean>
+	
+	<!-- 限定器 -->
+	<bean id="fan" class="com.mfzhang.service.impl.prop.Fan"></bean>
+	<bean class="com.mfzhang.service.impl.prop.Ruler">
+		<qualifier value="stringed"></qualifier>
+	</bean>
+	
+	<bean class="com.mfzhang.service.impl.clothes.Coat"></bean>
+	<bean class="com.mfzhang.service.impl.clothes.Jacket"></bean>
 
 </beans>

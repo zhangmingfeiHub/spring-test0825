@@ -2,12 +2,16 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="347" started-at="2016-09-12T02:06:19Z" finished-at="2016-09-12T02:06:19Z">
+  <suite name="Default suite" duration-ms="842" started-at="2016-09-14T11:51:31Z" finished-at="2016-09-14T11:51:32Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="347" started-at="2016-09-12T02:06:19Z" finished-at="2016-09-12T02:06:19Z">
+    <test name="Default test" duration-ms="842" started-at="2016-09-14T11:51:31Z" finished-at="2016-09-14T11:51:32Z">
       <class name="com.mfzhang.service.TestService">
-        <test-method status="PASS" signature="testPerfomer()[pri:0, instance:com.mfzhang.service.TestService@7e0b0338]" name="testPerfomer" duration-ms="330" started-at="2016-09-12T10:06:19Z" finished-at="2016-09-12T10:06:19Z">
+        <test-method status="PASS" signature="before()[pri:0, instance:com.mfzhang.service.TestService@71318ec4]" name="before" is-config="true" duration-ms="820" started-at="2016-09-14T19:51:31Z" finished-at="2016-09-14T19:51:32Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- before -->
+        <test-method status="PASS" signature="testPerfomer()[pri:0, instance:com.mfzhang.service.TestService@71318ec4]" name="testPerfomer" duration-ms="6" started-at="2016-09-14T19:51:32Z" finished-at="2016-09-14T19:51:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testPerfomer -->
