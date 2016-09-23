@@ -24,6 +24,8 @@
 		<maven.source.plugin.version>3.0.0</maven.source.plugin.version>
 		<log4j.version>1.2.14</log4j.version>
 		<slf4j.version>1.5.8</slf4j.version>
+		<servlet.api.version>3.1.0</servlet.api.version>
+		<aspectjrt.version>1.8.9</aspectjrt.version>
 	</properties>
 	
 	<build>
@@ -92,6 +94,17 @@
 			</dependency>
 			
 			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjrt</artifactId>
+			    <version>${aspectjrt.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjweaver</artifactId>
+			    <version>${aspectjrt.version}</version>
+			</dependency>
+			
+			<dependency>
 			    <groupId>org.testng</groupId>
 			    <artifactId>testng</artifactId>
 			    <version>${testng.version}</version>
@@ -123,6 +136,17 @@
 		        <artifactId>jcl-over-slf4j</artifactId>
 		        <version>${slf4j.version}</version>
 		    </dependency>
+		    
+		    <dependency>
+			    <groupId>javax.servlet</groupId>
+			    <artifactId>javax.servlet-api</artifactId>
+			    <version>${servlet.api.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>javax.inject</groupId>
+			    <artifactId>javax.inject</artifactId>
+			    <version>1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	

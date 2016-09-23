@@ -5,7 +5,7 @@
     <classes>
       <class name="com.mfzhang.service.TestService">
         <methods>
-          <include name="testPerfomer"/>
+          <include name="testThinker"/>
         </methods>
       </class> <!-- com.mfzhang.service.TestService -->
     </classes>

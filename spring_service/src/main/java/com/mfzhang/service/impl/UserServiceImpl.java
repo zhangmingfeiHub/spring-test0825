@@ -17,7 +17,7 @@ import com.mfzhang.mapper.UserMapper;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-	@Autowired
+	// @Autowired
 	private UserMapper userMapper;
 	
 	@Override

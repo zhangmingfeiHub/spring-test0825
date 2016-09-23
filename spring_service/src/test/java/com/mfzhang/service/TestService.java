@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -11,8 +12,10 @@ import com.mfzhang.api.bean.Auditorium;
 import com.mfzhang.api.bean.Stage;
 import com.mfzhang.api.bean.TestInitAndDestoryBean;
 import com.mfzhang.api.bean.Ticket;
+import com.mfzhang.api.service.MindReader;
 import com.mfzhang.api.service.Perfomer;
-import com.mfzhang.service.impl.performer.Instrumentalist;
+import com.mfzhang.api.service.Speaker;
+import com.mfzhang.api.service.Thinker;
 
 public class TestService {
 
@@ -56,8 +59,11 @@ public class TestService {
 //		Perfomer kenny4 = ctx.getBean("kenny4", Perfomer.class);
 //		kenny4.perform();
 		
-		Perfomer opusculum = ctx.getBean("opusculum", Perfomer.class);
-		opusculum.perform();
+//		Perfomer opusculum = ctx.getBean("opusculum", Perfomer.class);
+//		opusculum.perform();
+		
+//		Perfomer knifeJuggler = ctx.getBean("knifeJuggler", Perfomer.class);
+//		knifeJuggler.perform();
 	}
 	
 	@Test
@@ -91,5 +97,25 @@ public class TestService {
 		TestInitAndDestoryBean testInitAndDestoryBean = ctx.getBean("testInitAndDestoryBean", TestInitAndDestoryBean.class);
 	}
 	
+	@Test
+	public void testPerformerForScan() {
+		Perfomer opusculum = ctx.getBean("opusculum", Perfomer.class);
+		opusculum.perform();
+		
+		Perfomer knifeJuggler = ctx.getBean("knifeJuggler", Perfomer.class);
+		knifeJuggler.perform();
+	}
+	
+	@Test
+	public void testThinker() {
+		Thinker volunteer = ctx.getBean("volunteer", Thinker.class);
+		volunteer.thinkOfSomething("abc");
+		
+//		MindReader megician = ctx.getBean("megician", MindReader.class);
+//		Assert.assertEquals(megician.getThoughts(), "abc");
+//		
+		Speaker speakerVolunteer = ctx.getBean("volunteer", Speaker.class);
+		speakerVolunteer.speak("aaaaaa");
+	}
 	
 }

@@ -2,6 +2,7 @@ package com.mfzhang.service.impl.prop;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.mfzhang.api.service.Prop;
 
@@ -11,6 +12,7 @@ import com.mfzhang.api.service.Prop;
  * @author mingfei.zhang
  * @date 2016年9月14日-下午7:22:57
  */
+@Component
 public class Ruler implements Prop {
 
 	private static final Logger logger = LoggerFactory.getLogger(Ruler.class);
