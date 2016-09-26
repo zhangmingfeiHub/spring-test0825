@@ -9,3 +9,4 @@ target/
 *.ipr
 *.iws
 classes/
+*/test-output/
